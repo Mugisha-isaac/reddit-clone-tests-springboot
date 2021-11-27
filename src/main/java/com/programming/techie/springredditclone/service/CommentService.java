@@ -64,6 +64,6 @@ public class CommentService {
         if (comment.contains("shit")) {
             throw new SpringRedditException("Comments contains unacceptable language");
         }
-        return false;
+        return true;
     }
 }

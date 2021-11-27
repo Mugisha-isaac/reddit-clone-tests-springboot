@@ -1,5 +1,6 @@
 package com.programming.techie.springredditclone.service;
 
+import com.programming.techie.springredditclone.exceptions.SpringRedditException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,5 +17,12 @@ import static org.junit.jupiter.api.Assertions.*;
     }
     @Test
      @DisplayName("Should Throw Exception When Comment Contains Swear Word")
-
+     public void ShouldFailWhenCommentContainsSwearWord(){
+        CommentService commentService = new CommentService(null,null,null,null,null,null,null);
+//        System.out.println("Boolean gotten: " +  commentService.containsSwearWords("This is shit comment"));
+        SpringRedditException exception = assertThrows(SpringRedditException.class,() ->{
+            commentService.containsSwearWords("This is shitty comment");
+        });
+        assertTrue(exception.getMessage().contains("Comments contains unacceptable language"));
+    }
 }
