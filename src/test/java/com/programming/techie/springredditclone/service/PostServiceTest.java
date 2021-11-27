@@ -10,6 +10,7 @@ import com.programming.techie.springredditclone.repository.PostRepository;
 import com.programming.techie.springredditclone.repository.SubredditRepository;
 import com.programming.techie.springredditclone.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +39,12 @@ class PostServiceTest {
     private  PostMapper postMapper;
     @Captor
     private ArgumentCaptor<Post> postArgumentCaptor;
+
+//    @BeforeEach
+//    public void setUp(){
+//
+//    }
+
     @Test
     @DisplayName("Should Find Post By Id")
     void ShouldFindPostById() {
