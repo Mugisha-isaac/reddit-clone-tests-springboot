@@ -13,9 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
@@ -38,6 +36,8 @@ class PostServiceTest {
     private  AuthService authService;
     @Mock
     private  PostMapper postMapper;
+    @Captor
+    private ArgumentCaptor<Post> postArgumentCaptor;
     @Test
     @DisplayName("Should Find Post By Id")
     void ShouldFindPostById() {
@@ -65,6 +65,9 @@ class PostServiceTest {
         Mockito.when(postMapper.map(postRequest,subreddit,currentUser)).thenReturn(post);
         Mockito.when(authService.getCurrentUser()).thenReturn(currentUser);
         postService.save(postRequest);
-        Mockito.verify(postRepository,Mockito.times(1)).save(ArgumentMatchers.any(Post.class));
+//        Mockito.verify(postRepository,Mockito.times(1)).save(ArgumentMatchers.any(Post.class));
+        Mockito.verify(postRepository,Mockito.times(1)).save(postArgumentCaptor.capture());
+        assertThat(postArgumentCaptor.getValue().getPostId()).isEqualTo(123L);
+        assertThat(postArgumentCaptor.getValue().getPostName()).isEqualTo("First Post");
     }
 }
