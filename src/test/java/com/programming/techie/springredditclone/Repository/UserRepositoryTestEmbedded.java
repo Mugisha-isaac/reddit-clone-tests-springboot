@@ -33,5 +33,4 @@ public class UserRepositoryTestEmbedded {
         Optional<User> test = userRepository.findByUsername("testuser_sql");
         assertThat(test).isNotEmpty();
     }
-
 }
